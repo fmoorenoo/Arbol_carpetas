@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e4e4e4 0%, #808080 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 30px;
+}
+
+.content {
+    display: flex;
+}
+
+header {
+    font-size: 48px;
+    font-weight: 800;
+    color: #1f1f1f;
+    text-align: center;
+}
