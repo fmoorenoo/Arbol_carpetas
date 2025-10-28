@@ -2,17 +2,67 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Árbol de carpetas</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Árbol de Directorios</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="content">
-        <header>Árbol de carpetas</header>
+    <header>
+        <h1>Árbol de Directorios</h1>
+    </header>
+
+    <div class="contenido">
+        <!-- Formularios -->
+        <section class="formularios" id="formularios">
+            <!-- Formulario añadir -->
+            <form name="formulario-agregar" id="formulario-agregar" autocomplete="off">
+                <fieldset>
+                    <legend>Crear archivo o carpeta</legend>
+                    <div class="fila-formulario">
+                        <div>
+                            <label for="nombre">Nombre</label>
+                            <input id="nombre" type="text" placeholder="ej: imagenes, archivo.jpg" required>
+                        </div>
+                        <div>
+                            <label for="tipo">Tipo</label>
+                            <select id="tipo">
+                                <option value="carpeta">Carpeta</option>
+                                <option value="archivo">Archivo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fila-formulario">
+                        <div>
+                            <label for="destino">Ruta destino</label>
+                            <input id="destino" type="text" value="/" placeholder="/" />
+                        </div>
+                        <div class="contenedor-boton">
+                            <button class="boton-principal" type="submit">Añadir</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <!-- Formulario buscar -->
+            <form id="formulario-busqueda">
+                <fieldset>
+                    <legend>Buscar contenido</legend>
+                    <label for="busqueda">Nombre a buscar</label>
+                    <input id="busqueda" type="text"
+                        placeholder="Usa TAB para autocompletar" />
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Árbol de directorios -->
+        <section class="arbol">
+            <ul id="arbol-directorios">
+                Pendiente
+            </ul>
+        </section>
     </div>
     <script src="script.js"></script>
 </body>
-
 </html>

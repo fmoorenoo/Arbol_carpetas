@@ -1,25 +1,113 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #e4e4e4 0%, #808080 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 30px;
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial;
+    background: linear-gradient(180deg, #0b1020, #0f172a 40%);
+    color: #e5e7eb;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 12px;
+    padding: 16px;
 }
 
-.content {
-    display: flex;
-}
-
+/* Título */
 header {
-    font-size: 48px;
-    font-weight: 800;
-    color: #1f1f1f;
-    text-align: center;
+    display: grid;
+    gap: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Contenedor principal */
+.contenido {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.formularios, .arbol {
+    background: #111827;
+    border: 1px solid rgba(148, 163, 184, .15);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+}
+
+/* Formularios */
+.formularios {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form {
+    display: grid;
+    gap: 10px;
+}
+
+fieldset {
+    border: 1px solid rgba(148, 163, 184, .2);
+    border-radius: 10px;
+    padding: 5px 10px 20px 10px;
+}
+
+legend {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    padding: 0 6px;
+}
+
+.fila-formulario {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 8px;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, .25);
+    background: #0b1220;
+    color: #e5e7eb;
+}
+
+button {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, .25);
+    cursor: pointer;
+    background: #0b1220;
+    color: #e5e7eb;
+}
+
+button:hover {
+    filter: brightness(1.2);
+}
+
+.boton-principal {
+    border-color: rgba(59, 130, 246, .45);
+    background: linear-gradient(180deg, #111f36, #122242);
+}
+
+.contenedor-boton {
+    display: grid;
+    align-content: end;
+    gap: 8px;
 }
