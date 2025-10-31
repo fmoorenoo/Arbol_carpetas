@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Árbol de Directorios</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
 </head>
 
 <body>
     <header>
+        <img src="icon.png" alt="icon">
         <h1>Árbol de Directorios</h1>
     </header>
 
@@ -59,7 +61,15 @@
         <!-- Árbol de directorios -->
         <section class="arbol">
             <ul id="arbol-directorios">
-                Pendiente
+                <li class="fila">
+                    <p class="nombre-elemento">/ Raíz</p>
+                    <div class="carpeta">Carpeta</div>
+                    <div id="mas">+</div>
+                </li>
+                <li class="fila">
+                    <p class="nombre-elemento">Prueba.txt</p>
+                    <div class="archivo">Archivo</div>
+                </li>
             </ul>
         </section>
     </div>
