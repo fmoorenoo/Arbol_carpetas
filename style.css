@@ -115,6 +115,12 @@ button:hover {
     background: linear-gradient(180deg, #111f36, #122242);
 }
 
+.contenedor-boton {
+    display: grid;
+    align-content: end;
+    gap: 8px;
+}
+
 #arbol-directorios {
     list-style-type: none;
     padding-left: 0;
@@ -143,6 +149,7 @@ button:hover {
     font-size: 1rem;
     user-select: none;
 }
+
 
 .nodo {
     display: flex;
