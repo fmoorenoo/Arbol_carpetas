@@ -61,14 +61,15 @@
         <!-- Árbol de directorios -->
         <section class="arbol">
             <ul id="arbol-directorios">
-                <li class="fila">
-                    <p class="nombre-elemento">/ Raíz</p>
-                    <div class="carpeta">Carpeta</div>
-                    <div id="mas">+</div>
-                </li>
-                <li class="fila">
-                    <p class="nombre-elemento">Prueba.txt</p>
-                    <div class="archivo">Archivo</div>
+                <li class="nodo carpeta" data-name="/" data-path="/">
+                    <label class="titulo">
+                        <span class="nombre-elemento">/</span>
+                        <span class="etiqueta-carpeta">Carpeta</span>
+                        <input type="checkbox" class="ver" checked>
+                    </label>
+                    <button class="boton anadir" title="Añadir">+</button>
+                    <button class="boton eliminar" title="Eliminar" disabled>X</button>
+                    <ul class="hijos"></ul>
                 </li>
             </ul>
         </section>
