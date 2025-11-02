@@ -6,16 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputBusqueda = document.querySelector('#busqueda');
     const arbol = document.querySelector('#arbol-directorios');
 
-    [inputNombre, inputDestino].forEach((el) => {
-        el.addEventListener('input', () => el.setCustomValidity(''));
-        el.addEventListener('change', () => el.setCustomValidity(''));
-    });
+    // Mensajes de aviso
+    let msj;
+    function mensaje(texto) {
+        const div = document.getElementById('form-mensaje');
+        if (!div) return;
+        div.textContent = texto;
+        div.className = 'mensaje';
+        clearTimeout(msj);
+        msj = setTimeout(() => div.classList.add('oculto'), 2500);
+        div.classList.remove('oculto');
+    }
 
-    inputTipo.addEventListener('change', () => {
-        inputNombre.setCustomValidity('');
-        inputDestino.setCustomValidity('');
-    });
-
+    // Buscar carpeta por ruta
     const carpetaPorRuta = (ruta) => {
         ruta = ruta.trim();
         if (ruta === '/') return arbol.querySelector('li[data-path="/"]');
@@ -25,14 +28,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!parte) continue;
             const ul = actual.lastElementChild;
             if (!ul) return null;
-            nombre = CSS.escape(parte);
+            const nombre = CSS.escape(parte);
             const siguiente = ul.querySelector(`:scope > li.carpeta[data-name="${nombre}"]`);
-            if (!siguiente) return null
+            if (!siguiente) return null;
             actual = siguiente;
         }
         return actual;
     };
 
+    // Crear nodo (carpeta o archivo)
     const crearNodo = (tipo, name, rutaPadre) => {
         const li = document.createElement('li');
         li.className = `nodo ${tipo}`;
@@ -104,32 +108,30 @@ document.addEventListener("DOMContentLoaded", () => {
         return li;
     };
 
+    // Añadir elemento
     formAnadir.addEventListener('submit', (e) => {
         e.preventDefault();
         const nombre = inputNombre.value.trim();
         const tipo = inputTipo.value;
         const destino = inputDestino.value.trim();
 
-        inputNombre.setCustomValidity('');
-        inputDestino.setCustomValidity('');
-
         if (nombre === '') {
-            inputNombre.setCustomValidity('Introduce un nombre.');
-            inputNombre.reportValidity();
+            mensaje('Introduce un nombre.');
+            inputNombre.focus();
             return;
         }
 
-        const i = nombre.lastIndexOf('.');
-        if (tipo === 'archivo' && (i <= 0 || i >= nombre.length - 1)) {
-            inputNombre.setCustomValidity('El archivo debe tener extensión (ej. notas.txt).');
-            inputNombre.reportValidity();
+        const punto = nombre.lastIndexOf('.');
+        if (tipo === 'archivo' && (punto <= 0 || punto >= nombre.length - 1)) {
+            mensaje('El archivo debe tener extensión (ej. notas.txt).');
+            inputNombre.focus();
             return;
         }
 
         const carpetaDestino = carpetaPorRuta(destino);
         if (!carpetaDestino) {
-            inputDestino.setCustomValidity('La ruta destino no existe.');
-            inputDestino.reportValidity();
+            mensaje('La ruta destino no existe.');
+            inputDestino.focus();
             return;
         }
 
@@ -138,8 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
             for (let i = 0; i < ul.children.length; i++) {
                 const li = ul.children[i];
                 if (li.getAttribute('data-name') === nombre) {
-                    inputNombre.setCustomValidity('Ya existe un elemento con ese nombre en esa carpeta.');
-                    inputNombre.reportValidity();
+                    mensaje('Ya existe un elemento con ese nombre en esa carpeta.');
+                    inputNombre.focus();
                     return;
                 }
             }
@@ -166,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (clicado.matches('.boton.anadir')) {
             const parent = clicado.closest('li.carpeta');
             inputDestino.value = parent.getAttribute('data-path');
-            inputDestino.setCustomValidity('');
             inputNombre.focus();
             return;
         }
@@ -177,7 +178,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (li.classList.contains('carpeta')) {
                 const hijos = li.lastElementChild;
                 const tieneHijos = hijos && hijos.children.length > 0;
-                if (tieneHijos) return;
+                if (tieneHijos) {
+                    mensaje('No puedes eliminar una carpeta que contiene elementos.');
+                    return;
+                }
             }
             li.remove();
             return;
@@ -186,18 +190,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const todos = () => Array.from(arbol.querySelectorAll('li.nodo'));
 
-
     inputBusqueda.addEventListener('keydown', (pulsada) => {
         if (pulsada.key === 'Tab') {
             const busqueda = inputBusqueda.value.trim().toLowerCase();
             if (busqueda === '') return;
-            // Evitar que el 'TAB' haga la función que normalmente haría
             pulsada.preventDefault();
-            // Filtrar solo los elementos cuyo nombre comienza con la búsqueda
             const elementos = todos().filter(li =>
                 li.getAttribute('data-name').toLowerCase().startsWith(busqueda)
             );
-            // Si solo hay una coincidencia, autocompletar
             if (elementos.length === 1) {
                 inputBusqueda.value = elementos[0].getAttribute('data-name');
             }

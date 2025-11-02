@@ -188,3 +188,17 @@ button:hover {
 .oculto {
     display: none !important;
 }
+
+.mensaje {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, .25);
+    background: #111827;
+    color: #e5e7eb;
+    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    display: grid;
+    align-items: center;
+    min-height: 42px;
+    border-left: 4px solid #ef4444;
+}
