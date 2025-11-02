@@ -101,6 +101,10 @@ input, select {
     color: #e5e7eb;
 }
 
+select {
+    cursor: pointer; 
+}
+
 button {
     padding: 8px 12px;
     border-radius: 10px;
@@ -155,17 +159,19 @@ button:hover {
     user-select: none;
 }
 
-
 .nodo {
     display: flex;
     align-items: center;
     gap: 5px;
     padding: 6px 0;
+    flex-wrap: wrap;   
 }
 
 .nodo > .hijos {
     list-style: none;
-    margin-left: 24px;
+    flex: 0 0 100%;
+    width: 100%;
+    margin: 0 0 0 24px;
     padding-left: 14px;
     border-left: 3px dashed rgb(104, 111, 121);
 }
@@ -191,6 +197,7 @@ button:hover {
 }
 
 .boton.icono img {
+    display: block;
     width: 100%;
     height: 100%;
 }
@@ -206,7 +213,7 @@ button:hover {
     border: 1px solid rgba(148, 163, 184, .25);
     background: #111827;
     color: #e5e7eb;
-    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
     display: grid;
     align-items: center;
     min-height: 42px;

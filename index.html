@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Árbol de Directorios</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="imgs/icon.png" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <img src="icon.png" alt="icon">
+        <img src="imgs/icon.png" alt="icon">
         <h1>Árbol de Directorios</h1>
     </header>
 
@@ -66,13 +66,15 @@
                     <label class="titulo">
                         <span class="nombre-elemento">/</span>
                         <span class="etiqueta-carpeta">Carpeta</span>
-                        <input type="checkbox" class="ver" checked>
                     </label>
-                    <button class="boton anadir icono" title="Añadir" aria-label="Añadir">
-                        <img src="anadir.png" alt="Añadir">
+                    <button class="boton ver icono activo" title="Ocultar">
+                        <img src="imgs/ocultar.png" alt="Ocultar">
                     </button>
-                    <button class="boton eliminar icono" title="Eliminar" aria-label="Eliminar" disabled>
-                        <img src="eliminar.png" alt="Eliminar">
+                    <button class="boton anadir icono" title="Añadir">
+                        <img src="imgs/anadir.png" alt="Añadir">
+                    </button>
+                    <button class="boton eliminar icono" title="Eliminar" disabled>
+                        <img src="imgs/eliminar.png" alt="Eliminar">
                     </button>
                     <ul class="hijos"></ul>
                 </li>
