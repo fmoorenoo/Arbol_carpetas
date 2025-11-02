@@ -70,21 +70,27 @@ document.addEventListener("DOMContentLoaded", () => {
             label.appendChild(spanTipo);
             label.appendChild(ver);
 
-            const btonAnadir = document.createElement('button');
-            btonAnadir.className = 'boton anadir';
-            btonAnadir.title = 'Añadir';
-            btonAnadir.textContent = '+';
+            const btnAnadir = document.createElement('button');
+            btnAnadir.className = 'boton anadir icono';
+            btnAnadir.title, btnAnadir.ariaLabel = 'Añadir';
+            const imgAnadir = document.createElement('img');
+            imgAnadir.src = 'anadir.png';
+            imgAnadir.alt = 'Añadir';
+            btnAnadir.appendChild(imgAnadir);
 
             const btnEliminar = document.createElement('button');
-            btnEliminar.className = 'boton eliminar';
-            btnEliminar.title = 'Eliminar';
-            btnEliminar.textContent = 'X';
+            btnEliminar.className = 'boton eliminar icono';
+            btnEliminar.title, btnEliminar.ariaLabel = 'Eliminar';
+            const imgEliminar = document.createElement('img');
+            imgEliminar.src = 'eliminar.png';
+            imgEliminar.alt = 'Eliminar';
+            btnEliminar.appendChild(imgEliminar);
 
             const hijos = document.createElement('ul');
             hijos.className = 'hijos';
 
             li.appendChild(label);
-            li.appendChild(btonAnadir);
+            li.appendChild(btnAnadir);
             li.appendChild(btnEliminar);
             li.appendChild(hijos);
         } else {
@@ -97,9 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
             spanTipo.textContent = 'Archivo';
 
             const btnEliminar = document.createElement('button');
-            btnEliminar.className = 'boton eliminar';
-            btnEliminar.title = 'Eliminar';
-            btnEliminar.textContent = 'X';
+            btnEliminar.className = 'boton eliminar icono';
+            btnEliminar.title, btnEliminar.ariaLabel = 'Eliminar';
+            const imgEliminar = document.createElement('img');
+            imgEliminar.src = 'eliminar.png';
+            imgEliminar.alt = 'Eliminar';
+            btnEliminar.appendChild(imgEliminar);
 
             li.appendChild(spanNombre);
             li.appendChild(spanTipo);
@@ -158,22 +167,25 @@ document.addEventListener("DOMContentLoaded", () => {
     arbol.addEventListener('click', (e) => {
         const clicado = e.target;
 
-        if (clicado.matches('.ver')) {
-            const li = clicado.closest('li.carpeta');
+        const btnVer = clicado.closest('.ver');
+        if (btnVer) {
+            const li = btnVer.closest('li.carpeta');
             const cont = li.lastElementChild;
-            if (cont) cont.classList.toggle('oculto', !clicado.checked);
+            if (cont) cont.classList.toggle('oculto', !btnVer.checked);
             return;
         }
 
-        if (clicado.matches('.boton.anadir')) {
-            const parent = clicado.closest('li.carpeta');
+        const btnAdd = clicado.closest('.boton.anadir');
+        if (btnAdd) {
+            const parent = btnAdd.closest('li.carpeta');
             inputDestino.value = parent.getAttribute('data-path');
             inputNombre.focus();
             return;
         }
 
-        if (clicado.matches('.boton.eliminar')) {
-            const li = clicado.closest('li.nodo');
+        const btnDel = clicado.closest('.boton.eliminar');
+        if (btnDel) {
+            const li = btnDel.closest('li.nodo');
             if (li.getAttribute('data-path') == '/') return;
             if (li.classList.contains('carpeta')) {
                 const hijos = li.lastElementChild;

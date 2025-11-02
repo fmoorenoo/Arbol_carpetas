@@ -52,8 +52,7 @@
                 <fieldset>
                     <legend>Buscar contenido</legend>
                     <label for="busqueda">Nombre a buscar</label>
-                    <input id="busqueda" type="text"
-                        placeholder="Usa TAB para autocompletar" />
+                    <input id="busqueda" type="text" placeholder="Usa TAB para autocompletar" />
                 </fieldset>
             </form>
 
@@ -69,8 +68,12 @@
                         <span class="etiqueta-carpeta">Carpeta</span>
                         <input type="checkbox" class="ver" checked>
                     </label>
-                    <button class="boton anadir" title="Añadir">+</button>
-                    <button class="boton eliminar" title="Eliminar" disabled>X</button>
+                    <button class="boton anadir icono" title="Añadir" aria-label="Añadir">
+                        <img src="anadir.png" alt="Añadir">
+                    </button>
+                    <button class="boton eliminar icono" title="Eliminar" aria-label="Eliminar" disabled>
+                        <img src="eliminar.png" alt="Eliminar">
+                    </button>
                     <ul class="hijos"></ul>
                 </li>
             </ul>
