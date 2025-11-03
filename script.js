@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const btnVer = document.createElement('button');
       btnVer.className = 'boton ver icono activo';
       btnVer.title = 'Ocultar';
+      btnVer.disabled = true;
       const imgVer = document.createElement('img');
       imgVer.src = 'imgs/ocultar.png';
       imgVer.alt = 'Ocultar';
@@ -161,6 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const li = crearNodo(tipo, nombre, carpetaDestino.getAttribute('data-path'));
     carpetaDestino.lastElementChild.appendChild(li);
+    const btnVerDestino = carpetaDestino.querySelector('.boton.ver');
+    if (btnVerDestino) btnVerDestino.disabled = false;
 
     formAnadir.reset();
     inputDestino.value = destino;
@@ -207,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnDel = clicado.closest('.boton.eliminar');
     if (btnDel) {
       const li = btnDel.closest('li.nodo');
-      if (li.getAttribute('data-path') == '/') return;
+      if (li.getAttribute('data-path') === '/') return;
       if (li.classList.contains('carpeta')) {
         const hijos = li.lastElementChild;
         const tieneHijos = hijos && hijos.children.length > 0;
@@ -216,7 +219,14 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
       }
+      const padre = li.parentElement.closest('li.carpeta');
+      const ulHijos = padre.lastElementChild;
+      const btnVerPadre = padre.querySelector('.boton.ver');
+      
       li.remove();
+      if (btnVerPadre && ulHijos) {
+        btnVerPadre.disabled = ulHijos.children.length === 0;
+      }
       return;
     }
   });
