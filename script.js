@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputTipo = document.querySelector('#tipo');
   const inputDestino = document.querySelector('#destino');
   const inputBusqueda = document.querySelector('#busqueda');
+  document.querySelector('#formulario-busqueda').addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
   const arbol = document.querySelector('#arbol-directorios');
 
   // Mensajes de aviso
@@ -19,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Buscar carpeta por ruta
-  const carpetaPorRuta = (ruta) => {
+  function carpetaPorRuta(ruta) {
     ruta = ruta.trim();
     if (ruta === '/') return arbol.querySelector('li[data-path="/"]');
     const partes = ruta.split('/');
@@ -37,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // Crear nodo (carpeta o archivo)
-  const crearNodo = (tipo, name, rutaPadre) => {
+  function crearNodo(tipo, name, rutaPadre) {
     const li = document.createElement('li');
     li.className = `nodo ${tipo}`;
     li.setAttribute('data-name', name);
@@ -231,7 +234,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const todos = () => Array.from(arbol.querySelectorAll('li.nodo'));
+  function todos() {
+    return Array.from(arbol.querySelectorAll('li.nodo'));
+  }
+
+  inputBusqueda.addEventListener('input', () => {
+    const busqueda = inputBusqueda.value.trim().toLowerCase();
+    const elementos = todos();
+
+    if (busqueda === '') {
+      elementos.forEach(li => li.classList.remove('oculto'));
+      return;
+    }
+
+    elementos.forEach(li => {
+      const nombre = li.getAttribute('data-name').toLowerCase();
+      const coincide = nombre.includes(busqueda);
+
+      li.classList.toggle('oculto', !coincide);
+
+      if (coincide) {
+        let padre = li.parentElement.closest('li.carpeta');
+        while (padre) {
+          padre.classList.remove('oculto');
+          padre = padre.parentElement.closest('li.carpeta');
+        }
+      }
+    });
+  });
 
   inputBusqueda.addEventListener('keydown', (pulsada) => {
     if (pulsada.key === 'Tab') {
